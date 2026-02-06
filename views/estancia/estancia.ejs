@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es" class="bg-gray-50">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elienor - Instancia no encontrada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Manrope"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        gray: {
+                            50: '#F9FAFB',
+                            100: '#F3F4F6',
+                            200: '#E5E7EB',
+                            800: '#1F2937',
+                            900: '#111827',
+                            950: '#0B0F15',
+                        }
+                    },
+                    boxShadow: {
+                        'subtle': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                        'float': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.4s ease-out',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bg-grid-pattern {
+            background-image: radial-gradient(#E5E7EB 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+
+        body {
+            scrollbar-gutter: stable;
+        }
+    </style>
+</head>
+
+<body
+    class="text-gray-900 font-sans antialiased min-h-screen flex flex-col items-center justify-center relative bg-gray-50 bg-grid-pattern overflow-hidden">
+
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-50 via-transparent to-gray-50 pointer-events-none"></div>
+
+    <main class="w-full max-w-lg px-6 z-10 animate-fade-in-up">
+
+        <div class="text-center mb-8 flex flex-col items-center">
+            <div class="w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center mb-4 shadow-sm">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+            </div>
+            <span class="font-bold text-lg tracking-tight text-gray-900">Elienor-System<span
+                    class="text-gray-400">.sys</span></span>
+        </div>
+
+        <div class="bg-white rounded-xl border border-gray-200 p-8 shadow-float relative overflow-hidden">
+
+            <div class="absolute top-0 left-0 w-full h-1 bg-red-500"></div>
+
+            <div class="text-center space-y-6">
+
+                <div class="space-y-2">
+                    <h2 class="text-xl font-bold text-gray-900 tracking-tight">Instancia no identificada</h2>
+                    <p class="text-sm text-gray-500 leading-relaxed px-4">
+                        No hemos podido localizar el espacio de trabajo asociado a esta URL en la base de datos de <span
+                            class="font-bold text-gray-700">Elienor</span>.
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg border border-gray-200 p-4 text-left">
+                    <div class="flex items-center justify-between mb-3 border-b border-gray-200 pb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="h-2 w-2 rounded-full bg-red-500 animate-pulse"></div>
+                            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest font-mono">System
+                                Diagnostic</span>
+                        </div>
+                        <span
+                            class="text-[10px] font-mono font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded border border-red-100">404_NX_DOMAIN</span>
+                    </div>
+
+                    <div class="font-mono text-xs space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Target Tenant:</span>
+                            <span class="text-gray-900 font-medium bg-white px-1 rounded border border-gray-100">
+                                <%= typeof estancia !=='undefined' ? estancia : 'unknown_target' %>
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Resolver Status:</span>
+                            <span class="text-gray-900">Failed / Null</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Timestamp:</span>
+                            <span class="text-gray-500">
+                                <%= new Date().toISOString().split('T')[0] %>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                    <a href="/"
+                        class="flex-1 flex items-center justify-center px-4 py-2.5 bg-gray-900 text-white text-sm font-bold rounded-md shadow-sm hover:bg-gray-800 transition-all border border-transparent">
+                        <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        Ir al Portal
+                    </a>
+
+                    <button onclick="window.history.back()"
+                        class="flex-1 flex items-center justify-center px-4 py-2.5 bg-white text-gray-700 text-sm font-bold rounded-md border border-gray-200 shadow-sm hover:bg-gray-50 hover:text-gray-900 transition-all">
+                        Reintentar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mt-8 text-center">
+            <p class="text-[10px] font-mono text-gray-400 uppercase tracking-widest">
+                Server ID: CLUSTER-01 &bull; Route Exception
+            </p>
+        </div>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" class="bg-gray-50">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Manrope"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        gray: {
+                            50: '#F9FAFB',
+                            100: '#F3F4F6',
+                            200: '#E5E7EB',
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#0B0F15',
+                        },
+                        accent: {
+                            500: '#3B82F6',
+                            600: '#2563EB',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bg-grid-pattern {
+            background-image: radial-gradient(#E5E7EB 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+
+<body
+    class="text-gray-900 font-sans antialiased min-h-screen flex items-center justify-center relative overflow-hidden bg-gray-50">
+
+    <div class="absolute inset-0 bg-grid-pattern pointer-events-none z-0"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-gray-50/50 to-gray-50 pointer-events-none z-0">
+    </div>
+
+    <div class="relative z-10 w-full max-w-md px-6">
+
+        <div class="bg-white rounded-2xl border border-gray-200 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] p-8">
+
+            <div class="flex flex-col items-center text-center mb-8">
+                <div
+                    class="w-14 h-14 bg-gray-900 rounded-xl flex items-center justify-center mb-4 shadow-lg ring-4 ring-gray-100">
+                    <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <h1 class="text-xl font-bold tracking-tight text-gray-900">Elienor-Proyect<span
+                        class="text-gray-400">.sys</span></h1>
+                <p class="text-sm text-gray-500 font-mono mt-2 bg-gray-100 px-3 py-1 rounded-full">System Gateway v1.0
+                </p>
+            </div>
+
+            <div class="space-y-5">
+                <div>
+                    <label class="block text-[10px] font-mono font-medium text-gray-400 uppercase tracking-widest mb-2">
+                        Organization / Instance ID
+                    </label>
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i
+                                class="fa-solid fa-server text-gray-400 group-focus-within:text-gray-900 transition-colors"></i>
+                        </div>
+                        <input type="text" id="instanceInput" placeholder="ex: empresa1"
+                            class="block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-lg leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-gray-900 focus:border-transparent sm:text-sm font-mono transition-all duration-200">
+                    </div>
+                </div>
+
+                <button onclick="irAEstancia()"
+                    class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-all duration-200 transform hover:-translate-y-0.5">
+                    <span>Connect to Workspace</span>
+                    <svg class="ml-2 -mr-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-gray-100 flex justify-between items-center text-xs text-gray-500">
+                <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Servers Operational
+                </span>
+                <a href="#" class="font-medium hover:text-gray-900 transition-colors">Help Docs</a>
+            </div>
+        </div>
+
+        <p class="text-center text-xs text-gray-400 mt-6 font-mono">
+            Protected by Elienor Secure Gateway &copy; 2026
+        </p>
+    </div>
+
+    <script>
+        function irAEstancia() {
+            const estancia = document.getElementById('instanceInput').value.trim();
+            if (estancia) {
+                // Redirige a /nombre-estancia/login
+                window.location.href = `/${estancia}/login`;
+            } else {
+                // Efecto visual simple de error (borde rojo temporal)
+                const input = document.getElementById('instanceInput');
+                input.classList.add('ring-2', 'ring-red-500', 'border-transparent');
+                setTimeout(() => {
+                    input.classList.remove('ring-2', 'ring-red-500', 'border-transparent');
+                }, 2000);
+            }
+        }
+
+        // Permitir usar "Enter" para enviar
+        document.getElementById('instanceInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                irAEstancia();
+            }
+        });
+
+        // Auto-focus al cargar
+        window.onload = function () {
+            document.getElementById('instanceInput').focus();
+        };
+    </script>
+</body>
+
+</html>
