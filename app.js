@@ -52,7 +52,9 @@ const upload = multer({ storage: storage });
 // ==========================================
 const estanciasConfig = require('./config/estancias');
 const dashboardTutorRoutes = require('./routes/dashboard_tutor');
-const dashboardMaestrosRoutes = require('./routes/dashboard_maestros')
+const dashboardMaestrosRoutes = require('./routes/dashboard_maestros');
+const loginRoutes = require('./routes/login');
+const registerRoutes = require('./routes/register');
 
 
 
@@ -139,6 +141,8 @@ routerPrincipal.use(cargarConfiguracion);
 // ==========================================
 routerPrincipal.use('/dashboard/maestro', dashboardMaestrosRoutes);
 routerPrincipal.use('/dashboard/tutor', dashboardTutorRoutes);
+routerPrincipal.use('/auth/login', loginRoutes);
+routerPrincipal.use('/auth/register', registerRoutes);
 
 // 🛡️ Rate Limit específico para Login (Más estricto: 5 intentos)
 const loginLimiter = rateLimit({
@@ -172,10 +176,11 @@ routerPrincipal.get('/', (req, res) => {
 // ==========================================
 // INICIAR SERVIDOR
 // ==========================================
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     const green = '\x1b[32m';
     const reset = '\x1b[0m';
     console.log(`\n${green}🛡️  SERVIDOR SEGURO ACTIVO${reset}`);
     console.log(`🔒 Seguridad: Helmet, MongoStore, RateLimit, Sanitize`);
     console.log(`🌐 URL: http://localhost:${PORT}\n`);
+    console.log(`   Red:   http://ip:${PORT}`);
 });
