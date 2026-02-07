@@ -19,7 +19,9 @@ const getTenantModel = async (estanciaName, modelName) => {
     }
 
     let schema;
-
+    if (modelName === 'User') schema = userSchema;
+    else throw new Error(`El modelo ${modelName} no está definido en el selector.`);
+    return conn.models[modelName] || conn.model(modelName, schema);
 };
 
 module.exports = { getTenantModel };
