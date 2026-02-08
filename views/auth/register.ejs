@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Nuevo Ingreso | Universidad Central</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-black: #0f172a;
+            --panel-dark: #1e293b;
+            --border-color: #334155;
+            --accent: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-stack);
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* --- COLUMNA IZQUIERDA --- */
+        .visual-panel {
+            flex: 1.2;
+            background: linear-gradient(135deg, #0f172a 0%, #172554 100%);
+            border-right: 1px solid var(--border-color);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .panel-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .uni-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .uni-logo {
+            width: 45px;
+            height: 45px;
+            background: white;
+            color: var(--bg-black);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .uni-text h3 {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .uni-text span {
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Estilos Hero Resaltados */
+        .hero-section {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: white;
+            letter-spacing: -1px;
+        }
+
+        .hero-section h1 span {
+            background: linear-gradient(90deg, #3b82f6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.4));
+        }
+
+        .hero-section p:nth-of-type(1) {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 90%;
+            font-weight: 400;
+        }
+
+        .hero-section p:nth-of-type(2) {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            background: rgba(15, 23, 42, 0.6);
+            border-left: 3px solid #f59e0b;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            font-family: monospace;
+            display: inline-block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section {
+            animation: slideUpFade 0.8s ease-out forwards;
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Widget Estado */
+        .campus-status {
+            margin-top: auto;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+
+        .widget-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .metric-card h5 {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .metric-card .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- COLUMNA DERECHA: REGISTRO --- */
+        .login-panel {
+            flex: 0.8;
+            background: var(--bg-black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 60px;
+            position: relative;
+            overflow-y: auto;
+
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-header h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Grid para Nombre/Apellido */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .field-wrapper {
+            position: relative;
+        }
+
+        .field-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .field-wrapper input {
+            width: 100%;
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            padding: 14px 14px 14px 40px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .field-wrapper input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: #182030;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Barra de fuerza de contraseña */
+        .password-strength {
+            height: 3px;
+            width: 100%;
+            background: var(--border-color);
+            margin-top: 8px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--warning);
+            transition: 0.3s;
+        }
+
+        .field-wrapper input:not(:placeholder-shown)~.password-strength .strength-bar {
+            width: 40%;
+        }
+
+        /* Simulación visual */
+
+        /* Checkbox T&C */
+        .terms-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .terms-check input {
+            margin-top: 2px;
+            accent-color: var(--accent);
+        }
+
+        .terms-check a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .main-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .main-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .login-redirect {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .login-redirect a {
+            color: var(--text-main);
+            font-weight: 600;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        .login-redirect a:hover {
+            color: var(--accent);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+                overflow-y: auto;
+                height: auto;
+            }
+
+            .visual-panel {
+                flex: none;
+                height: auto;
+                padding: 30px 20px;
+            }
+
+            .login-panel {
+                padding: 40px 20px;
+                flex: none;
+            }
+
+            .campus-status {
+                display: none;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="visual-panel">
+        <div class="bg-pattern"></div>
+
+        <div class="panel-content">
+            <div class="uni-header">
+                <div class="uni-logo"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="uni-text">
+                    <h3>Universidad Central</h3>
+                    <span>Nuevo Ingreso</span>
+                </div>
+            </div>
+
+            <div class="hero-section">
+                <h1>Comienza tu <br><span>Futuro Profesional.</span></h1>
+                <p>Únete a la comunidad académica líder. Completa tu registro para acceder a bibliotecas, foros y
+                    gestión de matrícula online.</p>
+                <p>IMPORTANTE: Ten a mano tu código de pre-inscripción o carta de aceptación para validar tu identidad.
+                </p>
+            </div>
+
+            <div class="campus-status">
+                <div class="widget-header">
+                    <div class="widget-title"><i class="fa-solid fa-server"></i> Estado del Registro</div>
+                    <div style="font-size: 10px; color: var(--success);">● INSCRIPCIONES ABIERTAS</div>
+                </div>
+                <div class="metrics-row">
+                    <div class="metric-card">
+                        <h5>Plazas Disponibles</h5>
+                        <div class="value">84%</div>
+                    </div>
+                    <div class="metric-card">
+                        <h5>Semestre</h5>
+                        <div class="value" style="color: var(--accent);">2024-B</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="login-panel">
+        <div class="login-box">
+            <div class="form-header">
+                <h2>Activar Cuenta</h2>
+                <p>Completa los datos para generar tu credencial digital</p>
+            </div>
+
+            <form>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Nombre(s)</label>
+                        <div class="field-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" placeholder="Ej: Ana María" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Apellidos</label>
+                        <div class="field-wrapper">
+                            <i class="fa-solid fa-signature"></i>
+                            <input type="text" placeholder="Ej: Pérez García" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>ID de Matrícula / Código de Admisión</label>
+                    <div class="field-wrapper">
+                        <i class="fa-solid fa-barcode"></i>
+                        <input type="text" placeholder="Ej: ADM-2024-X99" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Correo Institucional (Opcional)</label>
+                    <div class="field-wrapper">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" placeholder="usuario@alumno.edu">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Establecer Contraseña</label>
+                    <div class="field-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Mínimo 8 caracteres" required>
+                        <div class="password-strength">
+                            <div class="strength-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="terms-check">
+                    <input type="checkbox" required>
+                    <span>He leído y acepto el <a href="#">Reglamento Estudiantil</a> y la Política de Privacidad de
+                        Datos.</span>
+                </label>
+
+                <button type="submit" class="main-btn">
+                    Confirmar Registro <i class="fa-solid fa-user-plus"></i>
+                </button>
+            </form>
+
+            <div class="login-redirect">
+                ¿Ya tienes cuenta activa?
+                <a href="#">Iniciar Sesión</a>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px; color: var(--border-color); font-size: 11px;">
+                <i class="fa-solid fa-lock"></i> Datos encriptados TLS 1.3
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

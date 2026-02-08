@@ -1,0 +1,19 @@
+<p class="text-[10px] uppercase tracking-wider text-gray-500 font-bold mb-2">Project Versions</p>
+
+<div class="space-y-1">
+    <p class="font-mono text-sm text-gray-800 font-medium">
+        v2.4.0 <span class="text-xs text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded ml-1">Stable</span>
+    </p>
+
+    <p class="font-mono text-sm text-gray-800 font-medium">
+        v2.5.0 <span class="text-xs text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded ml-1">Beta</span>
+    </p>
+
+    <p class="font-mono text-sm text-gray-800 font-medium">
+        v3.0.0 <span class="text-xs text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded ml-1">Alpha</span>
+    </p>
+
+    <p class="font-mono text-sm text-gray-800 font-medium">
+        v3.1.x <span class="text-xs text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded ml-1">Prototype</span>
+    </p>
+</div>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Académico Seguro | Universidad Central</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Paleta Académica Oscura (Azul Marino Profundo) */
+            --bg-black: #0f172a;
+            --panel-dark: #1e293b;
+            --border-color: #334155;
+            --accent: #3b82f6;
+            /* Azul brillante */
+            --accent-secondary: #8b5cf6;
+            /* Violeta académico */
+            --success: #10b981;
+            --warning: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-stack);
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* --- COLUMNA IZQUIERDA: INFORMACIÓN DEL CAMPUS --- */
+        .visual-panel {
+            flex: 1.2;
+            background: linear-gradient(135deg, #0f172a 0%, #172554 100%);
+            border-right: 1px solid var(--border-color);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fondo decorativo (Libros/Birretes abstractos) */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .panel-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .uni-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .uni-logo {
+            width: 45px;
+            height: 45px;
+            background: white;
+            color: var(--bg-black);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .uni-text h3 {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .uni-text span {
+            font-size: 12px;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Contenedor Principal con un poco más de aire */
+        .hero-section {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* 1. Título Impactante */
+        .hero-section h1 {
+            font-size: 3rem;
+            /* Más grande */
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: white;
+            letter-spacing: -1px;
+        }
+
+
+        .hero-section h1 span {
+            background: linear-gradient(90deg, #3b82f6, #a855f7);
+            /* Azul a Violeta */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+
+            filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.4));
+        }
+
+
+        .hero-section p:nth-of-type(1) {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            /* Gris muy claro */
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 90%;
+            font-weight: 400;
+        }
+
+
+        .hero-section p:nth-of-type(2) {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            background: rgba(15, 23, 42, 0.6);
+            /* Fondo oscuro semitransparente */
+            border-left: 3px solid #f59e0b;
+            /* Línea naranja de advertencia */
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            font-family: monospace;
+            /* Toque técnico */
+            display: inline-block;
+            /* Se ajusta al contenido */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animación de entrada suave */
+        .hero-section {
+            animation: slideUpFade 0.8s ease-out forwards;
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ajuste para móviles */
+        @media (max-width: 900px) {
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-section p:nth-of-type(1) {
+                font-size: 1rem;
+            }
+        }
+
+        /* WIDGET: ESTADO DE SERVICIOS ACADÉMICOS */
+        .campus-status {
+            margin-top: auto;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+
+        .widget-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .metric-card h5 {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .metric-card .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--success);
+        }
+
+        .alerts-list {
+            font-size: 12px;
+        }
+
+        .alert-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+            align-items: center;
+            color: var(--text-muted);
+        }
+
+        .alert-badge {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 10px;
+        }
+
+        .bg-warn {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .bg-info {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent);
+        }
+
+        /* --- COLUMNA DERECHA: LOGIN --- */
+        .login-panel {
+            flex: 0.8;
+            background: var(--bg-black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 60px;
+            position: relative;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-header h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .role-selector {
+            display: flex;
+            background: var(--panel-dark);
+            padding: 4px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .role-btn {
+            flex: 1;
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            color: var(--text-muted);
+            transition: 0.3s;
+        }
+
+        .role-btn.active {
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .field-wrapper {
+            position: relative;
+        }
+
+        .field-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .field-wrapper input {
+            width: 100%;
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            padding: 14px 14px 14px 40px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .field-wrapper input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: #182030;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .main-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .main-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .links-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .links-row a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .links-row a:hover {
+            color: var(--accent);
+        }
+
+        .secure-notice {
+            margin-top: 40px;
+            padding: 15px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            font-size: 11px;
+            color: #a7f3d0;
+            display: flex;
+            gap: 10px;
+            align-items: start;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+                overflow-y: auto;
+                height: auto;
+            }
+
+            .visual-panel {
+                flex: none;
+                height: auto;
+                padding: 30px 20px;
+            }
+
+            .login-panel {
+                padding: 40px 20px;
+            }
+
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .campus-status {
+                display: none;
+            }
+
+            /* Ocultar widgets en móvil para simplicidad */
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="visual-panel">
+        <div class="bg-pattern"></div>
+
+        <div class="panel-content">
+            <div class="uni-header">
+                <div class="uni-logo"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="uni-text">
+                    <h3>Universidad Central</h3>
+                    <span>Campus Virtual</span>
+                </div>
+            </div>
+
+            <div class="hero-section">
+                <h1>Acceso a Recursos <br><span>Académicos Digitales.</span></h1>
+                <p>Bienvenido al portal unificado. Gestiona tus asignaturas, consulta la biblioteca digital y accede a
+                    las aulas virtuales de forma segura.</p>
+                <p>Acceso restringido únicamente a personal autorizado. Todas las actividades en este portal son
+                    monitoreadas y auditadas conforme a la normativa ISO-27001.</p>
+            </div>
+
+            <div class="campus-status">
+                <div class="widget-header">
+                    <div class="widget-title"><i class="fa-solid fa-chart-pie"></i> Estado del Campus</div>
+                    <div style="font-size: 10px; color: var(--success);">● SISTEMA ONLINE</div>
+                </div>
+
+                <div class="metrics-row">
+                    <div class="metric-card">
+                        <h5>Aulas Virtuales Activas</h5>
+                        <div class="value"><span class="dot"></span> 1,240</div>
+                    </div>
+                    <div class="metric-card">
+                        <h5>Biblioteca Digital</h5>
+                        <div class="value" style="color: var(--accent);"><i class="fa-solid fa-book-open"></i> Abierta
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alerts-list">
+                    <div class="alert-item">
+                        <span class="alert-badge bg-warn">EXÁMENES</span>
+                        <span>Cierre de actas parciales: 15 de Octubre</span>
+                    </div>
+                    <div class="alert-item">
+                        <span class="alert-badge bg-info">BECAS</span>
+                        <span>Nuevas convocatorias disponibles en intranet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="login-panel">
+        <div class="login-box">
+            <div class="form-header">
+                <h2>Iniciar Sesión</h2>
+                <p>Introduce tus credenciales institucionales</p>
+            </div>
+
+            <div class="role-selector">
+                <div class="role-btn active" onclick="selectRole(this)">Estudiante</div>
+                <div class="role-btn" onclick="selectRole(this)">Docente</div>
+                <div class="role-btn" onclick="selectRole(this)">Admin</div>
+            </div>
+
+            <form>
+                <div class="input-group">
+                    <label>Matrícula / ID de Usuario</label>
+                    <div class="field-wrapper">
+                        <i class="fa-regular fa-id-badge"></i>
+                        <input type="text" placeholder="Ej: 2024-5501" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Contraseña del Portal</label>
+                    <div class="field-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="main-btn">
+                    Acceder al Aula Virtual <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <div class="links-row">
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                    <a href="#">Ayuda de Soporte Técnico</a>
+                </div>
+            </form>
+
+            <div class="secure-notice">
+                <i class="fa-solid fa-shield-cat"></i>
+                <div>
+                    <strong>Conexión Supervisada</strong><br>
+                    Para garantizar la integridad académica, este inicio de sesión registra IP y hora de acceso.
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px; color: var(--border-color); font-size: 11px;">
+                v.5.2.0 | Powered by EdTech Solutions
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Script simple para cambiar el estilo del selector de rol
+        function selectRole(element) {
+            document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
